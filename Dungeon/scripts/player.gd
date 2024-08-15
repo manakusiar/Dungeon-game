@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 # Constant Values
 const SPEED = 1500
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = 100
+const GRAVITY = 9.8 / 2
 
 # Base Variables
 var coins = 0
@@ -10,12 +11,14 @@ var acceleration = Vector2.ZERO
 var last_haxis = 0
 var dead = false
 var jumping = false
+var disable_cayote = false
 
 # Onready
 @onready var animations = $AnimationPlayer
 @onready var sprite = $Sprite2D
 @onready var cayote_timer = $CayoteTimer
 @onready var death_timer = $DeathTimer
+@onready var jump_timer: Timer = $JumpTimer
 @onready var jump_audio = $JumpAudio
 @onready var death_audio = $DeathAudio
 @onready var revive_audio = $ReviveAudio
@@ -24,13 +27,15 @@ var jumping = false
 
 func _physics_process(delta):
 	# Move player
+	var was_on_floor = is_on_floor()
 	var haxis = Input.get_axis("move_left", "move_right")
 	if not dead:
 		velocity.x += haxis * delta * SPEED
 
 	# Gravity
-	acceleration.y += 9.8 / 2
+	acceleration.y += GRAVITY
 	if is_on_floor():
+		disable_cayote = false
 		acceleration.y = 0
 	if is_on_ceiling():
 		acceleration.y = 1
@@ -39,19 +44,23 @@ func _physics_process(delta):
 	
 	
 	# Jump
-	var was_on_floor = is_on_floor()
-	if not dead and Input.is_action_just_pressed("jump") and (was_on_floor or not cayote_timer.is_stopped()):
-		acceleration.y -= 100
-		cayote_timer.stop()
-		jump_audio.play()
-		jumping = true
-		
-	if jumping == true:
-		if Input.is_action_just_released("jump"):
-			jumping = false
-			acceleration.y = 0
-		if velocity.y > 0:
-			jumping = false 
+	if not dead:
+		if Input.is_action_just_pressed("jump"):
+			if was_on_floor or not cayote_timer.is_stopped():
+				jump()
+			else:
+				jump_timer.start()
+				
+		if is_on_floor() and jump_timer.is_stopped() == false:
+			jump()
+			
+			
+		if jumping == true:
+			if Input.is_action_just_released("jump"):
+				jumping = false
+				acceleration.y = 0
+			if velocity.y > 0:
+				jumping = false 
 
 
 	# Acceleration and velocity
@@ -67,7 +76,7 @@ func _physics_process(delta):
 	# Movement
 	move_and_slide()
 
-	if not is_on_floor() and was_on_floor:
+	if not is_on_floor() and was_on_floor and not disable_cayote:
 		cayote_timer.start()
 	
 	# Animations
@@ -124,3 +133,14 @@ func _on_animation_player_animation_finished(anim_name):
 func add_coin(ammount):
 	coins += ammount
 	gui.reload_coins(coins)
+
+func jump():
+	acceleration.y -= JUMP_VELOCITY
+	cayote_timer.stop()
+	jump_timer.stop()
+	
+	jump_audio.pitch_scale = randf_range(1, 1.2)
+	jump_audio.play()
+	
+	jumping = true
+	disable_cayote = true

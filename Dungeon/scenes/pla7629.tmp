@@ -245,7 +245,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="JumpTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.5
 one_shot = true
 
 [node name="CayoteTimer" type="Timer" parent="."]

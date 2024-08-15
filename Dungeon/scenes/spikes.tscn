@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3bq7rd3721h8"]
+
+[ext_resource type="Texture2D" uid="uid://kf45aqgl83fj" path="res://assets/sprites/dungeon_tileset.png" id="1_56uar"]
+[ext_resource type="Script" path="res://scripts/spikes.gd" id="1_u82qu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl8de"]
+size = Vector2(16, 8)
+
+[node name="Spikes" type="Area2D"]
+script = ExtResource("1_u82qu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_56uar")
+hframes = 6
+region_enabled = true
+region_rect = Rect2(16, 224, 96, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_cl8de")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

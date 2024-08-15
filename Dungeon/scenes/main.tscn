@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://hyy3v7gklt62"]
+[gd_scene load_steps=15 format=4 uid="uid://hyy3v7gklt62"]
 
 [ext_resource type="PackedScene" uid="uid://cgkejkiif4lpn" path="res://scenes/player.tscn" id="1_blw5x"]
 [ext_resource type="PackedScene" uid="uid://dbdtigj2ksdy4" path="res://scenes/chest.tscn" id="2_3dqth"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ca7v4lojfysf2" path="res://scenes/coin.tscn" id="3_sanyj"]
 [ext_resource type="PackedScene" uid="uid://dtjwlx360v4p4" path="res://scenes/platform.tscn" id="5_5y26t"]
 [ext_resource type="PackedScene" uid="uid://ei73wdetyce0" path="res://scenes/respawn_point.tscn" id="6_nniqo"]
+[ext_resource type="PackedScene" uid="uid://c3bq7rd3721h8" path="res://scenes/spikes.tscn" id="8_6aai4"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ol8q7"]
 tile_data = PackedInt32Array(0, 65536, 14, 1, 131072, 14, 2, 196608, 14, 3, 262144, 14, 4, 327680, 14, 5, 393216, 14)
@@ -386,6 +387,7 @@ position = Vector2(216, 144)
 position = Vector2(328, 176)
 
 [node name="Player" parent="Game/Foreground" instance=ExtResource("1_blw5x")]
+unique_name_in_owner = true
 position = Vector2(104, 136)
 
 [node name="Camera2D" type="Camera2D" parent="Game/Foreground/Player"]
@@ -404,6 +406,56 @@ libraries = {
 "": SubResource("AnimationLibrary_tuofx")
 }
 autoplay = "move"
+
+[node name="Spikes" type="Node" parent="Game/Foreground"]
+
+[node name="Spikes" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(424, 240)
+
+[node name="Spikes2" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(440, 240)
+
+[node name="Spikes3" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(456, 240)
+
+[node name="Spikes4" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(520, 240)
+
+[node name="Spikes5" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(536, 240)
+
+[node name="Spikes6" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(552, 240)
+
+[node name="Spikes7" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(568, 240)
+
+[node name="Spikes8" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(584, 240)
+
+[node name="Spikes9" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(600, 240)
+
+[node name="Spikes10" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(664, 240)
+
+[node name="Spikes11" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(680, 240)
+
+[node name="Spikes12" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(696, 240)
+
+[node name="Spikes14" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(776, 240)
+
+[node name="Spikes15" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(792, 240)
+
+[node name="Spikes16" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(808, 240)
+
+[node name="Spikes13" parent="Game/Foreground/Spikes" instance=ExtResource("8_6aai4")]
+position = Vector2(712, 240)
 
 [node name="Background" type="Node" parent="Game"]
 
