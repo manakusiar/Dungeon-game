@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=3 uid="uid://bd8xjhersyyup"]
+
+[ext_resource type="Texture2D" uid="uid://cqx5lmu44wpv5" path="res://assets/sprites/satiro_spritesheet.png" id="1_bwx3q"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="1_qe8t0"]
+[ext_resource type="Texture2D" uid="uid://begp8mkyw15y" path="res://assets/sprites/ITEMs/coin.png" id="2_umnay"]
+[ext_resource type="FontFile" uid="uid://cnx3asa1qwc5" path="res://assets/fonts/8-bit Arcade In.ttf" id="3_spccl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs633"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x0ri7"]
+bg_color = Color(0.800491, 0.800491, 0.800491, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nggx2"]
+atlas = ExtResource("1_bwx3q")
+region = Rect2(8, 7, 16, 16)
+
+[sub_resource type="Theme" id="Theme_t0s50"]
+default_font = ExtResource("3_spccl")
+default_font_size = 32
+
+[node name="Gui" type="CanvasLayer"]
+script = ExtResource("1_qe8t0")
+
+[node name="PlayerInfoBox" type="Panel" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -68.0
+offset_right = 280.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fs633")
+
+[node name="AvatarFrame" type="Panel" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -48.0
+offset_right = 72.0
+offset_bottom = 16.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x0ri7")
+
+[node name="Avatar" type="TextureRect" parent="PlayerInfoBox/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_nggx2")
+stretch_mode = 5
+
+[node name="CoinTexture" type="TextureRect" parent="PlayerInfoBox"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 96.0
+offset_bottom = 32.0
+texture = ExtResource("2_umnay")
+
+[node name="Label" type="Label" parent="PlayerInfoBox/CoinTexture"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -16.0
+offset_right = 46.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = SubResource("Theme_t0s50")
+text = "x0"
+vertical_alignment = 1

@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbdtigj2ksdy4"]
+
+[ext_resource type="Script" path="res://scripts/chest.gd" id="1_dc875"]
+[ext_resource type="Texture2D" uid="uid://kf45aqgl83fj" path="res://assets/sprites/dungeon_tileset.png" id="1_f5182"]
+[ext_resource type="AudioStream" uid="uid://bdgwdmajw7cbr" path="res://assets/sounds/chest_open.wav" id="3_yo43a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iurak"]
+atlas = ExtResource("1_f5182")
+region = Rect2(192, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4eex"]
+atlas = ExtResource("1_f5182")
+region = Rect2(208, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mpxax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iurak")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4eex")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbue4"]
+
+[node name="Chest" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_mpxax")
+animation = &"closed"
+script = ExtResource("1_dc875")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_qbue4")
+
+[node name="ChestOpen" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_yo43a")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

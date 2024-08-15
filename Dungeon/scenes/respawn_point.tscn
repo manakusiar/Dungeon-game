@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ei73wdetyce0"]
+
+[ext_resource type="Texture2D" uid="uid://kf45aqgl83fj" path="res://assets/sprites/dungeon_tileset.png" id="1_pbw8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbuas"]
+atlas = ExtResource("1_pbw8w")
+region = Rect2(120, 192, 32, 32)
+
+[node name="RespawnPoint" type="Sprite2D" groups=["respawn"]]
+texture = SubResource("AtlasTexture_cbuas")
+offset = Vector2(0, -16)
