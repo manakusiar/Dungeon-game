@@ -23,7 +23,9 @@ var disable_cayote = false
 @onready var death_audio = $DeathAudio
 @onready var revive_audio = $ReviveAudio
 @onready var gui = %Gui
-@onready var camera: Camera2D = $Camera2D
+@onready var camera: Camera2D = %Camera2D
+@onready var platform_ray_cast: RayCast2D = $PlatformRayCast
+
 
 
 func _physics_process(delta):
@@ -146,3 +148,7 @@ func jump():
 	
 	jumping = true
 	disable_cayote = true
+	
+	if platform_ray_cast.is_colliding():
+		var platform = platform_ray_cast.get_collider()
+		acceleration += platform.velocity * 10

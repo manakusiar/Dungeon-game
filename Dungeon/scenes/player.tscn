@@ -219,12 +219,16 @@ _data = {
 "stop": SubResource("Animation_lfso7")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4qycj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_vnnk5")
+
+[node name="PlatformRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 5)
+collision_mask = 16
 
 [node name="HurtBox" type="Area2D" parent="." groups=["hurtbox"]]
 

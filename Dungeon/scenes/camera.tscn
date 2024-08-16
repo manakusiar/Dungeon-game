@@ -4,7 +4,5 @@
 
 [node name="Camera2D" type="Camera2D"]
 zoom = Vector2(2, 2)
-limit_left = 0
-position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("1_gyyph")
