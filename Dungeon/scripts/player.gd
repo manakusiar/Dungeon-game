@@ -23,6 +23,7 @@ var disable_cayote = false
 @onready var death_audio = $DeathAudio
 @onready var revive_audio = $ReviveAudio
 @onready var gui = %Gui
+@onready var camera: Camera2D = $Camera2D
 
 
 func _physics_process(delta):
@@ -102,6 +103,7 @@ func die():
 	death_timer.start()
 	animations.play("die")
 	death_audio.play()
+	camera.apply_shake()
 	
 
 func respawn_player():
